@@ -67,20 +67,25 @@ const CartPage: React.FC = () => {
     const user = auth.currentUser;
     if (user && cartItems.length > 0) {
         try {
-            // Create a new order
+            const orderItems = cartItems.map(item => ({
+                id: item.id.toString(),
+                name: item.title,
+                quantity: item.quantity,
+                price: item.price, // Ensure price is included
+                image: item.image,
+            }));
+
             await addDoc(collection(db, "orders"), {
                 userId: user.uid,
-                items: cartItems.map(item => ({ ...item, name: item.title })),
+                items: orderItems,
                 totalPrice: total,
                 createdAt: serverTimestamp(),
             });
 
-            // Clear the cart
             const cartRef = doc(db, 'carts', user.uid);
             await updateDoc(cartRef, { items: [] });
             setCartItems([]);
 
-            // Navigate to profile page
             navigate('/profile');
         } catch (error) {
             console.error("Error during checkout: ", error);

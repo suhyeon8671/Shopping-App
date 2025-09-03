@@ -11,13 +11,18 @@ const ProfilePage: React.FC = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const user = auth.currentUser;
-      if (user) {
-        setUserEmail(user.email);
-        const userOrders = await getOrders(user.uid);
-        setOrders(userOrders);
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          setUserEmail(user.email);
+          const userOrders = await getOrders(user.uid);
+          setOrders(userOrders);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchUserData();
@@ -39,6 +44,7 @@ const ProfilePage: React.FC = () => {
             <div key={order.id} className="order-item">
               <div className="order-header">
                 <span><strong>주문 번호:</strong> {order.id}</span>
+                <span><strong>주문 날짜:</strong> {order.createdAt.toDate().toLocaleDateString()} {order.createdAt.toDate().toLocaleTimeString()}</span>
                 <span><strong>총 결제 금액:</strong> ${order.totalPrice.toFixed(2)}</span>
               </div>
               <div className="order-products">

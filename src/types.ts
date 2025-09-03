@@ -17,15 +17,17 @@ export interface CartItem extends Product {
 }
 
 export interface OrderItem {
-    id: string;
+    id: string; 
     name: string;
     quantity: number;
     price: number;
-  }
-  
-  export interface Order {
+    image: string; 
+}
+
+export interface Order {
     id: string;
+    userId: string; 
     items: OrderItem[];
-    total: number;
-    timestamp: number;
-  }
+    totalPrice: number;
+    createdAt: any; 
+}

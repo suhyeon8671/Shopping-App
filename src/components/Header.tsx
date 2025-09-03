@@ -43,7 +43,7 @@ const Header = () => {
     const handleLogout = async () => {
         try {
             await signOut(auth);
-            navigate('/login');
+            navigate('/'); // Redirect to homepage after logout
         } catch (error) {
             console.error("Logout failed: ", error);
         }
