@@ -1,0 +1,82 @@
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 0.2s;
+    background-color: white;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-image-link {
+    display: block;
+    padding: 1rem;
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+.product-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden; /* Added to contain the text */
+}
+
+.product-name {
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center; /* Center the product name */
+}
+
+.product-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 38px; /* Fixed height for the actions container */
+}
+
+.add-to-cart-btn, .in-cart-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    white-space: nowrap; /* Prevent text from wrapping */
+    flex-shrink: 0; /* Prevent the button from shrinking */
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.in-cart-btn {
+    background-color: #333;
+    color: #fff;
+    cursor: default;
+    font-size: 0.8rem; /* Slightly smaller font for longer text */
+}
+
+.product-price {
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: all 0.2s ease-in-out;
+    padding-left: 0.5rem; /* Add some space between button and price */
+    position: relative;
+    top: 2px;
+}

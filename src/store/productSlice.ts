@@ -1,10 +1,10 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import type { ProductType } from '../types';
+import { Product } from '../types';
 
 interface ProductsState {
-  products: ProductType[];
+  products: Product[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
@@ -17,7 +17,7 @@ const initialState: ProductsState = {
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
   const response = await axios.get('https://fakestoreapi.com/products');
-  return response.data as ProductType[];
+  return response.data as Product[];
 });
 
 const productsSlice = createSlice({

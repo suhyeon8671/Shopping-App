@@ -1,30 +1,29 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
-import { login } from '../store/authSlice';
-import { FiLogIn } from 'react-icons/fi';
-import './LoginPage.css';
+import './SignupPage.css';
 
-const LoginPage = () => {
+const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    if (password !== confirmPassword) {
+      setError('비밀번호가 일치하지 않습니다.');
+      return;
+    }
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      dispatch(login({ id: userCredential.user.uid, email: userCredential.user.email || '' }));
+      await createUserWithEmailAndPassword(auth, email, password);
       navigate('/');
     } catch (err) {
       if (err instanceof Error) {
-        setError(`로그인 실패: ${err.message}`);
+        setError(`가입 실패: ${err.message}`);
       } else {
         setError('알 수 없는 오류가 발생했습니다.');
       }
@@ -32,11 +31,11 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-page-container">
-      <div className="login-form-container">
-        <h1 className="login-title">로그인</h1>
+    <div className="signup-page-container">
+      <div className="signup-form-container">
+        <h1 className="signup-title">가입하기</h1>
         {error && <p className="error-message">{error}</p>}
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSignup}>
           <div className="input-group">
             <input 
               type="email" 
@@ -55,17 +54,23 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)} 
             />
           </div>
-          <button type="submit" className="login-button">
-            <FiLogIn />
-            <span>로그인</span>
-          </button>
+          <div className="input-group">
+            <input 
+              type="password" 
+              id="confirm-password" 
+              placeholder="비밀번호 확인" 
+              value={confirmPassword} 
+              onChange={(e) => setConfirmPassword(e.target.value)} 
+            />
+          </div>
+          <button type="submit" className="signup-button">가입하기</button>
         </form>
-        <p className="signup-link">
-          계정이 없으신가요? <Link to="/signup">가입하기</Link>
+        <p className="login-link">
+          이미 계정이 있으신가요? <Link to="/login">로그인</Link>
         </p>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignupPage;

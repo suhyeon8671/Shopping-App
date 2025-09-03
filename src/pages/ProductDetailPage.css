@@ -1,0 +1,118 @@
+.product-detail-page {
+    padding: 2rem;
+    background-color: #f9f9f9;
+}
+
+.product-detail-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.product-image-section {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image-section img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.product-info-section {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-category {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    text-transform: capitalize;
+}
+
+.product-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.product-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    flex-grow: 1;
+    margin-bottom: 2rem;
+}
+
+.product-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.add-to-cart-btn,
+.go-to-cart-btn,
+.in-cart-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    border: 1px solid;
+}
+
+/* "Go to Cart" & "In Cart" buttons: PRIMARY, BLACK STYLE */
+.go-to-cart-btn,
+.in-cart-btn {
+    background-color: #333;
+    color: #fff;
+    border-color: #333;
+    cursor: pointer;
+}
+
+.go-to-cart-btn:hover {
+    background-color: #555;
+    border-color: #555;
+}
+
+.in-cart-btn {
+    cursor: default; /* Disabled state */
+}
+
+/* "Add to Cart" button: WHITE STYLE */
+.add-to-cart-btn {
+    background-color: #fff;
+    color: #333;
+    border-color: #ccc;
+    cursor: pointer;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #f0f0f0;
+}
+
+/* Loading, error, and not-found states */
+.loading-indicator,
+.error-message,
+.not-found {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+}
